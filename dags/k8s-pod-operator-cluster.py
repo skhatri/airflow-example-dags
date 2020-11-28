@@ -15,7 +15,7 @@ import datetime
 from airflow import models
 
 dag = DAG(
-   dag_id="kube-pod-operator",
+   dag_id="kube-pod-operator-cluster",
    start_date=airflow.utils.dates.days_ago(2),
    schedule_interval="@daily",
 )
