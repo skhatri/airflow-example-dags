@@ -21,7 +21,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: skhatri/airflow-example-dags:1.0.3
+          tags: skhatri/airflow-example-dags:1.0.4
 
 
 
