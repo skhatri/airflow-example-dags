@@ -93,7 +93,7 @@ k8s_spark_launcher = kubernetes_pod_operator.KubernetesPodOperator(
         '--conf',
         'spark.kubernetes.driver.request.cores=0.2',       
         '--conf',
-        'spark.kubernetes.container.image=skhatri/spark-k8s-hello:1.0.7',
+        'spark.kubernetes.container.image=skhatri/spark-k8s-hello:1.0.8',
         '--conf',
         'spark.jars.ivy=/tmp/.ivy',
         '--conf',

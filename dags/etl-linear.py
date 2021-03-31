@@ -35,14 +35,14 @@ load_into_database = PythonOperator(
     task_id="load_into_database",
     python_callable=_load_into_database,
     dag=dag,
-    executor_config={"KubernetesExecutor": {"image": "skhatri/airflow-example-dags:1.0.2"}},
+    executor_config={"KubernetesExecutor": {"image": "skhatri/airflow-example-dags:1.0.3"}},
 )
 
 summary = BashOperator(
     task_id="summary",
     bash_command='echo "Finished processing input file"',
     dag=dag,
-    executor_config={"KubernetesExecutor": {"image": "skhatri/airflow-example-dags:1.0.2"}},
+    executor_config={"KubernetesExecutor": {"image": "skhatri/airflow-example-dags:1.0.3"}},
 )
 
 
