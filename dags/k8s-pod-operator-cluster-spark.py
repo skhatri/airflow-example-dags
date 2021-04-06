@@ -16,7 +16,7 @@ from airflow import models
 
 
 launcher_image=os.getenv("SPARK_LAUNCHER_IMAGE", "skhatri/spark:v3.0.1-b1")
-job_image = "spark.kubernetes.container.image=%s:%s" % (os.getenv("SPARK_JOB_IMAGE","skhatri/spark-k8s-hello:1.0.9"))
+job_image = "spark.kubernetes.container.image=%s" % (os.getenv("SPARK_JOB_IMAGE","skhatri/spark-k8s-hello:1.0.9"))
 in_cluster = os.getenv("IN_CLUSTER", "True") == 'True'
 
 dag = DAG(
