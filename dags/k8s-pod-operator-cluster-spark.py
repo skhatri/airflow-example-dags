@@ -110,7 +110,7 @@ k8s_spark_launcher = kubernetes_pod_operator.KubernetesPodOperator(
         'spark.kubernetes.authenticate.driver.serviceAccountName=job-trigger-sa',
         '--conf',
         'spark.authenticate=false',
-        'local:///tmp/jars/spark-k8s-hello.jar'
+        'local:///opt/spark/app/spark-k8s-hello.jar'
     ],
     namespace='default',
     image=launcher_image,
