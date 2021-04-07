@@ -101,6 +101,8 @@ k8s_spark_launcher = kubernetes_pod_operator.KubernetesPodOperator(
         '--conf',
         job_image,
         '--conf',
+        'spark.kubernetes.driver.volumes.emptyDir.tmpdir.mount.path=/tmp',
+        '--conf',
         'spark.jars.ivy=/tmp/.ivy',
         '--conf',
         'spark.app.name=hello',
