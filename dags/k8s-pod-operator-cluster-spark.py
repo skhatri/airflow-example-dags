@@ -16,7 +16,7 @@ from airflow import models
 
 
 launcher_image=os.getenv("SPARK_LAUNCHER_IMAGE", "skhatri/spark:v3.0.1-b1")
-job_image = "spark.kubernetes.container.image=%s" % (os.getenv("SPARK_JOB_IMAGE","skhatri/spark-k8s-hello:1.0.9"))
+job_image = "spark.kubernetes.container.image=%s" % (os.getenv("SPARK_JOB_IMAGE", "skhatri/spark-k8s-hello:1.0.9"))
 in_cluster = os.getenv("IN_CLUSTER", "True") == 'True'
 
 dag = DAG(
@@ -76,6 +76,9 @@ spark_env_vars = [
     }
 ]
 
+tmp_volume = k8s.V1Volume(name="tmp-dir", configs={ 'emptyDir': {} })
+tmp_volume_mount = k8s.V1VolumeMount(name="tmp-dir", mount_path="/tmp")
+
 k8s_spark_launcher = kubernetes_pod_operator.KubernetesPodOperator(
     task_id='k8s-spark-launcher',
     name='k8s-spark-launcher',
@@ -112,7 +115,9 @@ k8s_spark_launcher = kubernetes_pod_operator.KubernetesPodOperator(
     in_cluster=in_cluster,
     env_vars=spark_env_vars,
     service_account_name='job-trigger-sa',
-    executor_config={"LocalExecutor": {}}
+    executor_config={"LocalExecutor": {}},
+    volume_mounts = [tmp_volume_mount],
+    volumes = [tmp_volume]
 )
 
 k8s_pod = kubernetes_pod_operator.KubernetesPodOperator(
