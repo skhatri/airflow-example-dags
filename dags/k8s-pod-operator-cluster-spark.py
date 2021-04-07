@@ -76,7 +76,7 @@ spark_env_vars = [
     }
 ]
 
-tmp_volume = k8s.V1Volume(name="tmp-dir", configs={ 'emptyDir': {} })
+tmp_volume = k8s.V1Volume(name="tmp-dir", empty_dir=k8s.V1EmptyDirVolumeSource())
 tmp_volume_mount = k8s.V1VolumeMount(name="tmp-dir", mount_path="/tmp")
 
 k8s_spark_launcher = kubernetes_pod_operator.KubernetesPodOperator(
