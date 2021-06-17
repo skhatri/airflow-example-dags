@@ -11,10 +11,14 @@ img_name=os.getenv("AIRFLOW__KUBERNETES__WORKER_CONTAINER_REPOSITORY")
 img_tag=os.getenv("AIRFLOW__KUBERNETES__WORKER_CONTAINER_TAG")
 img="%s:%s" % (img_name, img_tag)
 
+def _failure_alert():
+  print("failed")
+
 dag = DAG(
    dag_id="process_etl_linear",
    start_date=airflow.utils.dates.days_ago(7),
    schedule_interval="@daily",
+   default_args = {"on_failure_callback": _failure_alert }
 )
 
 upload_input_to_s3 = BashOperator(
